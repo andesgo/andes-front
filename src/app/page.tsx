@@ -8,6 +8,290 @@ import React, { useState, useEffect } from 'react';
 import { ShoppingBag, Truck, MapPin, Clock, Shield, Users, ArrowRight, ExternalLink, WalletCards, BadgeDollarSign, Archive, Store, ChevronRight, ChevronLeft } from 'lucide-react'
 
 export default function Home() {
+  // Componente TiendasSection completo
+  const TiendasSection = () => {
+    // Datos de tiendas (puedes mover esto a un archivo separado o API)
+    const tiendas = [
+      {
+        id: 1,
+        nombre: "Falabella",
+        descripcion: "La tienda departamental líder en Chile con moda, tecnología, hogar y más.",
+        logo: "/api/placeholder/200/120", // placeholder - reemplaza con tu logo real
+        url: "https://www.falabella.com",
+        categoria: "Retail General"
+      },
+      {
+        id: 2,
+        nombre: "Ripley",
+        descripcion: "Gran variedad en moda, electrónica, hogar y deportes con las mejores marcas.",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.ripley.cl",
+        categoria: "Retail General"
+      },
+      {
+        id: 3,
+        nombre: "Paris",
+        descripcion: "Tienda departamental con productos de moda, belleza, hogar y tecnología.",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.paris.cl",
+        categoria: "Retail General"
+      },
+      {
+        id: 4,
+        nombre: "La Polar",
+        descripcion: "Productos para el hogar, moda y tecnología con facilidades de pago.",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.lapolar.cl",
+        categoria: "Retail General"
+      },
+      {
+        id: 5,
+        nombre: "Lider",
+        descripcion: "Supermercado líder con productos de alimentación, hogar y más.",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.lider.cl",
+        categoria: "Supermercado"
+      },
+      {
+        id: 6,
+        nombre: "Jumbo",
+        descripcion: "Hipermercado con gran variedad de productos alimentarios y para el hogar.",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.jumbo.cl",
+        categoria: "Supermercado"
+      },
+      {
+        id: 7,
+        nombre: "PC Factory",
+        descripcion: "Especialistas en tecnología, computadores, componentes y gaming.",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.pcfactory.cl",
+        categoria: "Tecnología"
+      },
+      {
+        id: 8,
+        nombre: "Hites",
+        descripcion: "Tienda con productos de moda, hogar, deportes y tecnología.",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.hites.com",
+        categoria: "Retail General"
+      },
+      {
+        id: 9,
+        nombre: "Decathlon",
+        descripcion: "Tienda con productos de Deporte, Ropa",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.decathlon.cl",
+        categoria: "Retail Deportivo"
+      },
+      {
+        id: 10,
+        nombre: "Ikea",
+        descripcion: "Tienda de muebles y decoración para el hogar.",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.ikea.cl",
+        categoria: "Home Depot"
+      },
+      {
+        id: 11,
+        nombre: "Sodimac",
+        descripcion: "Tienda de construcción y mejoramiento del hogar.",
+        logo: "/api/placeholder/200/120",
+        url: "https://www.sodimac.cl",
+        categoria: "Home Depot"
+      }
+    ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+    const [itemsPerView, setItemsPerView] = useState(4);
+
+    // Responsive items per view
+    useEffect(() => {
+      const handleResize = () => {
+        if (window.innerWidth < 640) {
+          setItemsPerView(1);
+        } else if (window.innerWidth < 768) {
+          setItemsPerView(2);
+        } else if (window.innerWidth < 1024) {
+          setItemsPerView(3);
+        } else {
+          setItemsPerView(4);
+        }
+      };
+
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Auto-scroll effect
+    useEffect(() => {
+      if (!isAutoPlaying) return;
+
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => {
+          const maxIndex = tiendas.length - itemsPerView;
+          if (prevIndex >= maxIndex) {
+            return 0; // Volver al inicio
+          }
+          return prevIndex + 1;
+        });
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }, [isAutoPlaying, itemsPerView, tiendas.length]);
+
+    const nextSlide = () => {
+      const maxIndex = tiendas.length - itemsPerView;
+      setCurrentIndex((prevIndex) => {
+        if (prevIndex >= maxIndex) {
+          return 0; // Volver al inicio
+        }
+        return prevIndex + 1;
+      });
+    };
+
+    const prevSlide = () => {
+      const maxIndex = tiendas.length - itemsPerView;
+      setCurrentIndex((prevIndex) => {
+        if (prevIndex <= 0) {
+          return maxIndex; // Ir al final
+        }
+        return prevIndex - 1;
+      });
+    };
+
+    return (
+      <section id="donde-comprar" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">¿Dónde Comprar?</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Encuentra los mejores productos en las tiendas más populares de Chile. Compramos en cualquier tienda online por ti.
+            </p>
+            <button className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all font-semibold">
+              <Store className="w-5 h-5 mr-2" />
+              Ver Todas las Tiendas
+            </button>
+          </div>
+
+          {/* Carousel Container */}
+          <div 
+            className="relative"
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+          >
+            {/* Navigation Buttons */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+              aria-label="Tienda anterior"
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-700" />
+            </button>
+            
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+              aria-label="Siguiente tienda"
+            >
+              <ChevronRight className="w-6 h-6 text-gray-700" />
+            </button>
+
+            {/* Carousel */}
+            <div className="overflow-hidden px-12">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ 
+                  transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
+                }}
+              >
+                {tiendas.map((tienda) => (
+                  <div
+                    key={tienda.id}
+                    className="flex-shrink-0 px-4"
+                    style={{ width: `${100 / itemsPerView}%` }}
+                  >
+                    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group">
+                      <div className="p-6">
+                        {/* Logo placeholder */}
+                        <div className="bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl p-6 mb-6 flex items-center justify-center h-32">
+                          <div className="text-blue-600 font-bold text-2xl">
+                            {tienda.nombre.charAt(0)}
+                          </div>
+                        </div>
+                        
+                        {/* Content */}
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <h3 className="text-xl font-bold text-gray-900">{tienda.nombre}</h3>
+                            <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
+                              {tienda.categoria}
+                            </span>
+                          </div>
+                          
+                          <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+                            {tienda.descripcion}
+                          </p>
+                          
+                          <a
+                            href={tienda.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-sm group-hover:translate-x-1 transition-all"
+                          >
+                            Visitar Tienda
+                            <ExternalLink className="w-4 h-4 ml-1" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Indicators */}
+            <div className="flex justify-center space-x-2 mt-8">
+              {Array.from({ length: tiendas.length - itemsPerView + 1 }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    index === currentIndex 
+                      ? 'bg-blue-600 w-8' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Ir a página ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">100+</div>
+              <div className="text-gray-600">Tiendas Disponibles</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-emerald-600 mb-2">24/7</div>
+              <div className="text-gray-600">Compras Disponibles</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">100%</div>
+              <div className="text-gray-600">Compras Seguras</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-orange-600 mb-2">48h</div>
+              <div className="text-gray-600">Tiempo de Procesamiento</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  };
 
   return (
     <>
@@ -23,16 +307,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              {/* <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
-                <ShoppingBag className="h-6 w-6 text-white" />
-              </div> */}
               <div >
                   <Image
-                    src="/andes_logo.png" // pon aquí tu logo (ej: public/logo.png)
+                    src="/andes_logo.png"
                     alt="AndesGO Logo"
                     width={52}
                     height={60}
-                    className="rounded-lg" // o "rounded-lg" si lo quieres redondeado
+                    className="rounded-lg"
                   />
                 </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
@@ -226,6 +507,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Donde comprar - USAR EL COMPONENTE AQUÍ */}
+      <TiendasSection />
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-emerald-600">
         <div className="max-w-4xl mx-auto text-center px-4">
@@ -248,16 +532,13 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                {/* <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
-                  <ShoppingBag className="h-6 w-6 text-white" />
-                </div> */}
                 <div >
                   <Image
-                    src="/andes_logo.png" // pon aquí tu logo (ej: public/logo.png)
+                    src="/andes_logo.png"
                     alt="AndesGO Logo"
                     width={60}
                     height={60}
-                    className="rounded-lg" // o "rounded-lg" si lo quieres redondeado
+                    className="rounded-lg"
                   />
                 </div>
                 <span className="text-2xl font-bold">AndesGO</span>
