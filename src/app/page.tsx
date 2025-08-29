@@ -2,7 +2,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ShoppingBag, Truck, MapPin, Clock, Shield, Users, ArrowRight, CheckCircle } from 'lucide-react'
+import { ShoppingBag, Truck, MapPin, Clock, Shield, Users, ArrowRight, CheckCircle, WalletCards, BadgeDollarSign, Archive } from 'lucide-react'
 
 export default function Home() {
   return (
@@ -119,7 +119,37 @@ export default function Home() {
               <p className="text-gray-600 leading-relaxed">
                 Protección completa de tu compra. Si algo sale mal, nos hacemos responsables.
               </p>
+            </div> 
+
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl hover:shadow-lg transition-all">
+              <div className="bg-blue-600 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+                <WalletCards className="h-7 w-7 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Paga en Cuotas</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Facilidades de pago para que puedas adquirir lo que necesitas sin preocupaciones.
+              </p>
             </div>
+
+            <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl hover:shadow-lg transition-all">
+              <div className="bg-emerald-600 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+                <BadgeDollarSign className="h-7 w-7 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Aprovecha Ofertas</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Mantente atento a las promociones del retail CyberDay BlackFriday.
+              </p>
+            </div>
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl hover:shadow-lg transition-all">
+              <div className="bg-purple-600 w-14 h-14 rounded-full flex items-center justify-center mb-6">
+                <Archive className="h-7 w-7 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Bodega Seguro</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Cambio de planes, no te preocupes, almacenamos tus productos por largos periodos sin costo extra.
+              </p>
+            </div>
+            
           </div>
         </div>
       </section>

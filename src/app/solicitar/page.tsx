@@ -17,6 +17,7 @@ interface CustomerInfo {
   name: string
   email: string
   phone: string
+  countryCode: string
   arrivalDate: string
   deliveryOption: 'pickup' | 'hotel'
   hotelName: string
@@ -40,6 +41,7 @@ export default function SolicitarPage() {
     name: '',
     email: '',
     phone: '',
+    countryCode: '+54',
     arrivalDate: '',
     deliveryOption: 'pickup',
     hotelName: '',
@@ -165,6 +167,7 @@ export default function SolicitarPage() {
           name: '',
           email: '',
           phone: '',
+          countryCode: '+54',
           arrivalDate: '',
           deliveryOption: 'pickup',
           hotelName: '',
@@ -273,14 +276,40 @@ export default function SolicitarPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Teléfono *
                   </label>
-                  <input
-                    type="tel"
-                    value={customerInfo.phone}
-                    onChange={(e) => updateCustomerInfo('phone', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="+1 234 567 8900"
-                    required
-                  />
+                  <div className="flex">
+                    {/* Dropdown de prefijo de país */}
+                    <select
+                      value={customerInfo.countryCode}
+                      onChange={(e) => updateCustomerInfo('countryCode', e.target.value)}
+                      className="px-3 py-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                    >
+                      <option value="+54">🇦🇷 +54</option>
+                      <option value="+55">🇧🇷 +55</option>
+                      <option value="+56">🇨🇱 +56</option>
+                      <option value="+57">🇨🇴 +57</option>
+                      <option value="+51">🇵🇪 +51</option>
+                      <option value='+591'>🇧🇴 +591</option>
+                      <option value="+593">🇪🇨 +593</option>
+                      <option value='+595'>🇵🇾 +595</option>
+                      <option value="+598">🇺🇾 +598</option>
+                      <option value="+58">🇻🇪 +58</option>
+                      <option value="+52">🇲🇽 +52</option>
+                      <option value='+509'>🇭🇳 +509</option>
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+34">🇪🇸 +34</option>
+                      {/* agrega más países aquí */}
+                    </select>
+
+                    {/* Input del número */}
+                    <input
+                      type="tel"
+                      value={customerInfo.phone}
+                      onChange={(e) => updateCustomerInfo('phone', e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="9 1234 5678"
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div>

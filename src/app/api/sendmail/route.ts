@@ -17,6 +17,7 @@ interface CustomerInfo {
   name: string
   email: string
   phone: string
+  countryCode: string
   arrivalDate: string
   deliveryOption: 'pickup' | 'hotel'
   hotelName: string
@@ -111,7 +112,7 @@ export async function POST(request: NextRequest) {
               <h2>👤 Información del Cliente</h2>
               <p><span class="label">Nombre:</span><span class="value">${customerInfo.name}</span></p>
               <p><span class="label">Email:</span><span class="value">${customerInfo.email}</span></p>
-              <p><span class="label">Teléfono:</span><span class="value">${customerInfo.phone}</span></p>
+              <p><span class="label">Teléfono:</span><span class="value">${customerInfo.countryCode} ${customerInfo.phone}</span></p>
               <p><span class="label">Fecha de llegada:</span><span class="value">${new Date(customerInfo.arrivalDate).toLocaleDateString('es-CL')}</span></p>
               <p><span class="label">Tipo de entrega:</span><span class="value">${customerInfo.deliveryOption === 'pickup' ? 'Retiro en oficina' : 'Entrega en hotel'}</span></p>
               ${customerInfo.deliveryOption === 'hotel' ? `
@@ -257,8 +258,7 @@ export async function POST(request: NextRequest) {
 
     // Enviar email al administrador
     const adminEmail = await resend.emails.send({
-      from: 'AndesGO <onboarding@resend.dev>', // Cambia por tu dominio verificado
-      // from: 'AndesGO <noreply@andesgo.com>', // Cambia por tu dominio verificado
+      from: 'AndesGO <noreply@andesgo.cl>', // Cambia por tu dominio verificado
       to: [process.env.ADMIN_EMAIL || 'admin@andesgo.com'], // Tu email de administrador
       subject: `🚨 Nueva Cotización #${quotationId} - ${customerInfo.name}`,
       html: adminEmailHtml,
@@ -271,7 +271,7 @@ export async function POST(request: NextRequest) {
 
     try {
     customerEmail = await resend.emails.send({
-      from: 'AndesGO <onboarding@resend.dev>',
+      from: 'AndesGO <noreply@andesgo.cl>',
       to: [customerInfo.email],
       subject: `✅ Cotización recibida #${quotationId} - AndesGO`,
       html: customerEmailHtml,
