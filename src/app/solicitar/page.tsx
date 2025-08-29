@@ -2,6 +2,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ShoppingBag, Plus, Trash2, Send, ArrowLeft, Package, User, Mail, Phone, MapPin } from 'lucide-react'
 
@@ -10,6 +11,8 @@ interface ProductItem {
   // name: string
   url: string
   quantity: number
+  color: string
+  size: string
   notes: string
 }
 
@@ -33,6 +36,8 @@ export default function SolicitarPage() {
       // name: '',
       url: '',
       quantity: 1,
+      color: '',
+      size: '',
       notes: ''
     }
   ])
@@ -59,6 +64,8 @@ export default function SolicitarPage() {
       // name: '',
       url: '',
       quantity: 1,
+      color: '',
+      size: '',
       notes: ''
     }
     setProducts([...products, newProduct])
@@ -161,6 +168,8 @@ export default function SolicitarPage() {
           id: '1',
           url: '',
           quantity: 1,
+          color: '',
+          size: '',
           notes: ''
         }])
         setCustomerInfo({
@@ -214,8 +223,17 @@ export default function SolicitarPage() {
               <span className="text-gray-600">Volver</span>
             </Link>
             <div className="flex items-center space-x-2">
-              <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
+              {/* <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
                 <ShoppingBag className="h-6 w-6 text-white" />
+              </div> */}
+              <div >
+                <Image
+                  src="/andes_logo.png" // pon aquí tu logo (ej: public/logo.png)
+                  alt="AndesGO Logo"
+                  width={52}
+                  height={60}
+                  className="rounded-lg" // o "rounded-lg" si lo quieres redondeado
+                />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
                 AndesGO
@@ -496,6 +514,30 @@ export default function SolicitarPage() {
 
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Talla
+                        </label>
+                        <input
+                          type="text"
+                          value={product.size}
+                          onChange={(e) => updateProduct(product.id, 'size', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="talla, capacidad, etc."
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Color
+                        </label>
+                        <input
+                          type="text"
+                          value={product.color}
+                          onChange={(e) => updateProduct(product.id, 'color', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Color, variaciones, etc."
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                           Notas Adicionales
                         </label>
                         <input
@@ -503,7 +545,7 @@ export default function SolicitarPage() {
                           value={product.notes}
                           onChange={(e) => updateProduct(product.id, 'notes', e.target.value)}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          placeholder="Color, talla, variaciones, etc."
+                          placeholder="Notas, variaciones, comentarios, etc."
                         />
                       </div>
                     </div>
@@ -599,8 +641,17 @@ export default function SolicitarPage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
+              {/* <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
                 <ShoppingBag className="h-6 w-6 text-white" />
+              </div> */}
+              <div >
+                <Image
+                  src="/andes_logo.png" // pon aquí tu logo (ej: public/logo.png)
+                  alt="AndesGO Logo"
+                  width={60}
+                  height={60}
+                  className="rounded-lg" // o "rounded-lg" si lo quieres redondeado
+                />
               </div>
               <span className="text-2xl font-bold">AndesGO</span>
             </div>

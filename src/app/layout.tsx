@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'AndesGO',
-  description: 'Servicio Premium de Shopping Personal',
+  description: 'Servicio Premium de Shopping Personal, facilita tus compras en Chile desde el extranjero.',
 }
 
 export default function RootLayout({

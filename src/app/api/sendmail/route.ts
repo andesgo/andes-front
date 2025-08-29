@@ -10,6 +10,8 @@ interface ProductItem {
   id: string
   url: string
   quantity: number
+  color: string
+  size: string
   notes: string
 }
 
@@ -128,6 +130,8 @@ export async function POST(request: NextRequest) {
                   <h3>Producto #${index + 1}</h3>
                   <p><span class="label">URL:</span> <a href="${product.url}" target="_blank">${product.url}</a></p>
                   <p><span class="label">Cantidad:</span><span class="value">${product.quantity}</span></p>
+                  ${product.color ? `<p><span class="label">Color:</span><span class="value">${product.color}</span></p>` : ''}
+                  ${product.size ? `<p><span class="label">Tamaño:</span><span class="value">${product.size}</span></p>` : ''}
                   ${product.notes ? `<p><span class="label">Notas:</span><span class="value">${product.notes}</span></p>` : ''}
                 </div>
               `).join('')}
@@ -191,8 +195,22 @@ export async function POST(request: NextRequest) {
               <p>Hemos recibido tu solicitud de cotización para <strong>${products.length} producto(s)</strong> y ya estamos trabajando en ella.</p>
               
               <h3>📦 Resumen de tu solicitud:</h3>
+              
               <ul>
-                ${products.map((product, index) => `<li><strong>Producto #${index + 1}</strong> - Cantidad: ${product.quantity}${product.notes ? ` (${product.notes})` : ''}</li>`).join('')}
+                ${products.map((product, index) => {
+                  // Armamos un array con los detalles opcionales
+                  const details: string[] = [];
+                  if (product.notes) details.push(`Notas: ${product.notes}`);
+                  if (product.size) details.push(`Tamaño: ${product.size}`);
+                  if (product.color) details.push(`Color: ${product.color}`);
+
+                  // Unimos los detalles con " - " o salto de línea
+                  const detailsFormatted = details.length > 0
+                    ? `<br><span style="margin-left:16px; font-size:0.9em; color:#555;">${details.join(' • ')}</span>`
+                    : "";
+
+                  return `<li><strong>Producto #${index + 1}</strong> - Cantidad: ${product.quantity}${detailsFormatted}</li>`;
+                }).join('')}
               </ul>
               
               <p><strong>Fecha de llegada:</strong> ${new Date(customerInfo.arrivalDate).toLocaleDateString('es-CL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>

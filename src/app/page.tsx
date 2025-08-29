@@ -2,19 +2,39 @@
 'use client'
 
 import Link from 'next/link'
-import { ShoppingBag, Truck, MapPin, Clock, Shield, Users, ArrowRight, CheckCircle, WalletCards, BadgeDollarSign, Archive } from 'lucide-react'
+import Image from "next/image";
+import Head from 'next/head';
+import React, { useState, useEffect } from 'react';
+import { ShoppingBag, Truck, MapPin, Clock, Shield, Users, ArrowRight, ExternalLink, WalletCards, BadgeDollarSign, Archive, Store, ChevronRight, ChevronLeft } from 'lucide-react'
 
 export default function Home() {
+
   return (
+    <>
+    <Head>
+      <title>AndesGO - Compra en Chile desde el extranjero fácilmente</title>
+      <meta name="description" 
+      content="AndesGO facilita tus compras en Chile desde cualquier país. Recogemos tus pedidos, hacemos el shopping online por ti, almacenamos tus compras y ofrecemos pago en cuotas. ¡Compra en Chile sin complicaciones!" />
+    </Head>
+    
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
+              {/* <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
                 <ShoppingBag className="h-6 w-6 text-white" />
-              </div>
+              </div> */}
+              <div >
+                  <Image
+                    src="/andes_logo.png" // pon aquí tu logo (ej: public/logo.png)
+                    alt="AndesGO Logo"
+                    width={52}
+                    height={60}
+                    className="rounded-lg" // o "rounded-lg" si lo quieres redondeado
+                  />
+                </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
                 AndesGO
               </span>
@@ -144,7 +164,7 @@ export default function Home() {
               <div className="bg-purple-600 w-14 h-14 rounded-full flex items-center justify-center mb-6">
                 <Archive className="h-7 w-7 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Bodega Seguro</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Bodega Segura</h3>
               <p className="text-gray-600 leading-relaxed">
                 Cambio de planes, no te preocupes, almacenamos tus productos por largos periodos sin costo extra.
               </p>
@@ -228,8 +248,17 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
+                {/* <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-2 rounded-lg">
                   <ShoppingBag className="h-6 w-6 text-white" />
+                </div> */}
+                <div >
+                  <Image
+                    src="/andes_logo.png" // pon aquí tu logo (ej: public/logo.png)
+                    alt="AndesGO Logo"
+                    width={60}
+                    height={60}
+                    className="rounded-lg" // o "rounded-lg" si lo quieres redondeado
+                  />
                 </div>
                 <span className="text-2xl font-bold">AndesGO</span>
               </div>
@@ -274,5 +303,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+    </>
+  );
 }
