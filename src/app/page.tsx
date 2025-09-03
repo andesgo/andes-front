@@ -485,7 +485,7 @@ export default function Home() {
                 </div>
 
                 <blockquote className="text-xl text-gray-700 leading-relaxed mb-8 italic">
-                  "{reseñas[currentReview].comentario}"
+                  {reseñas[currentReview].comentario}
                 </blockquote>
 
                 <div className="border-t border-gray-200 pt-6">
