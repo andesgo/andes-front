@@ -60,7 +60,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         <Script
-          id="gtag-init"
+          id="google-analytics"
           strategy="afterInteractive"
         >
           {`
