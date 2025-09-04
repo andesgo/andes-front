@@ -340,13 +340,16 @@ export default function Home() {
                     ))}
                   </ul>
 
-                  <button className={`w-full py-3 px-6 rounded-full font-semibold transition-all ${
-                    plan.popular
-                      ? 'bg-emerald-600 text-white hover:bg-emerald-700'
-                      : 'border-2 border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600'
-                  }`}>
+                  <Link
+                    href={`/bodegaje?plan=${plan.id}`}
+                    className={`block w-full py-3 px-6 rounded-full font-semibold text-center transition-all ${
+                      plan.popular
+                        ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                        : 'border-2 border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600'
+                    }`}
+                  >
                     Seleccionar Plan
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -376,7 +379,7 @@ export default function Home() {
         nombre: "Carlos Mendoza",
         pais: "Perú",
         rating: 5,
-        comentario: "Excelente experiencia con el servicio de bodegaje. Pude explorar Santiago sin preocuparme por mis maletas. El lugar es seguro y el personal muy amable.",
+        comentario: "Excelente experiencia con el servicio de bodegaje. Luego de hacer varias compras por mi parada en Santiago pude dejarlas seguras mientras fui a recorrer las Torres del Paine por una semana, personal muy amable.",
         producto: "Servicio de bodegaje - 1 semana",
         fecha: "Diciembre 2024"
       },
