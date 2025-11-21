@@ -32,6 +32,9 @@ export const metadata: Metadata = {
   },
 }
 
+const GA_ID = 'G-DC0NHJ9DBR';
+const AW_ID = 'AW-17747465413';
+
 export default function RootLayout({
   children,
 }: {
@@ -56,7 +59,7 @@ export default function RootLayout({
 
         {/* Google Analytics (gtag.js) */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-DC0NHJ9DBR"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
         />
         <Script
@@ -67,7 +70,9 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-DC0NHJ9DBR');
+
+            gtag('config', '${GA_ID}', { send_page_view: false });
+            gtag('config', '${AW_ID}', { send_page_view: false });
           `}
         </Script>
       </head>

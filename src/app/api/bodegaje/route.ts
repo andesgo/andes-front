@@ -159,22 +159,3 @@ function calcularTotalBackend(data: any): number {
 
   return 0
 }
-
-// // Función para validar formato de teléfono chileno (opcional)
-// function validarTelefonoChileno(telefono: string): boolean {
-//   // Regex básico para teléfonos chilenos (+56 9 XXXX XXXX)
-//   const regex = /^(\+?56\s?)?[9]\s?\d{4}\s?\d{4}$/
-//   return regex.test(telefono.replace(/\s/g, ''))
-// }
-
-// // Función para validar documento (opcional)
-// function validarDocumento(documento: string, tipo: string): boolean {
-//   if (tipo === 'dni') {
-//     // RUT chileno básico (sin validación de DV completa)
-//     return /^\d{7,8}-[\dkK]$/.test(documento) || /^\d{8,9}$/.test(documento)
-//   } else if (tipo === 'passport') {
-//     // Pasaporte: letras y números, 6-9 caracteres
-//     return /^[A-Z0-9]{6,9}$/i.test(documento)
-//   }
-//   return false
-// }
