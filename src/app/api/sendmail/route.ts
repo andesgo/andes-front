@@ -43,9 +43,45 @@ interface CustomerInfo {
   hotelOther: string
 }
 
+interface AttachmentPayload {
+  quotationId: string
+  createdAt: string
+  customerInfo: CustomerInfo
+  products: ProductItem[]
+  summary?: {
+    totalProducts: number
+    productsWithLink: number
+    productsSearchRequest: number
+  }
+}
+
 interface RequestBody {
   customerInfo: CustomerInfo
   products: ProductItem[]
+}
+
+function buildAttachmentPayload(quotationId: string, body: RequestBody) {
+  const createdAt = new Date().toISOString()
+  const totalProducts = body.products.length
+  const productsWithLink = body.products.filter(p => p.type === 'with_link').length
+
+  return {
+    quotationId,
+    createdAt,
+    customerInfo: body.customerInfo,
+    products: body.products,
+    summary: {
+      totalProducts,
+      productsWithLink,
+      productsSearchRequest: totalProducts - productsWithLink
+    }
+  }
+}
+
+function createAttachmentBuffer(quotationId: string, body: RequestBody) {
+  const payload = buildAttachmentPayload(quotationId, body)
+  const jsonString = JSON.stringify(payload, null, 2)
+  return Buffer.from(jsonString, 'utf-8')
 }
 
 export async function POST(request: Request) {
@@ -156,13 +192,21 @@ export async function POST(request: Request) {
           )
         }
     
+        const attachmentBuffer = createAttachmentBuffer(quotationId, body)
         // Enviar email al administrador
         const adminEmail = await resend.emails.send({
           from: 'AndesGO <noreply@andesgo.cl>', // Cambia por tu dominio verificado
           to: [process.env.NEXT_PUBLIC_EMAIL_ADMIN || 'admin@andesgo.com'], // Tu email de administrador
           subject: `🚨 New Quote #${quotationId} - ${customerInfo.name}`,
           html: adminEmailHtml,
-          replyTo: customerInfo.email
+          replyTo: customerInfo.email,
+          attachments: [
+            {
+              filename: `quote-${quotationId}.json`,
+              content: attachmentBuffer,
+              contentType: 'application/json'
+            }
+          ]
         })
     
         // Enviar email de confirmación al cliente
