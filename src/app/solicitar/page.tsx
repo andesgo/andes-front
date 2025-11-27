@@ -573,7 +573,7 @@ export default function SolicitarPage() {
                           <option value="Los Ríos">Los Ríos</option>
                           <option value="Aysén">Aysén</option>
                           <option value="Magallanes">Magallanes</option>
-                          <option value="O'Higgins">O'Higgins</option>
+                          <option value="O'Higgins">O&apos;Higgins</option>
                           <option value="Ñuble">Ñuble</option>
                         </select>
                       </div>
