@@ -1,10 +1,11 @@
-// app/api/send-email/route.ts (nota el nombre correcto del directorio)
+// app/api/send-email/route.ts 
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export type ArrivalTimeOption = 'tomorrow' | 'one_week' | 'not_sure' | 'specific_date'
+export type DeliveryMethod = 'pickup_santiago' | 'hotel_delivery' | 'pickup_buenosaires'
 
 export interface ProductWithLink {
   id: string
@@ -28,6 +29,14 @@ export interface ProductSearchRequest {
 
 export type ProductItem = ProductWithLink | ProductSearchRequest
 
+interface HotelDetails {
+  region: string
+  comuna: string
+  address: string
+  hotelName?: string
+  roomNumber?: string
+}
+
 interface CustomerInfo {
   name: string
   email: string
@@ -36,11 +45,8 @@ interface CustomerInfo {
   phone: string
   arrivalTimeOption: ArrivalTimeOption
   arrivalDate: string
-  deliveryOption: 'pickup' | 'hotel'
-  hotelName: string
-  hotelAddress: string
-  hotelCommune: string
-  hotelOther: string
+  deliveryMethod: DeliveryMethod
+  hotelDetails: HotelDetails | null
 }
 
 interface AttachmentPayload {
@@ -397,12 +403,12 @@ function generateAdminEmail(
             <p><span class="label">Documento:</span><span class="value">${customerInfo.document || 'No especificado'}</span></p>
             <p><span class="label">Teléfono:</span><span class="value">${customerInfo.countryCode} ${customerInfo.phone}</span></p>
             <p><span class="label">Llegada:</span><span class="value">${arrivalTimeFormatted}</span></p>
-            <p><span class="label">Tipo de entrega:</span><span class="value">${customerInfo.deliveryOption === 'pickup' ? 'Retiro en oficina' : 'Entrega en hotel'}</span></p>
-            ${customerInfo.deliveryOption === 'hotel' ? `
-              <p><span class="label">Hotel:</span><span class="value">${customerInfo.hotelName}</span></p>
-              <p><span class="label">Dirección:</span><span class="value">${customerInfo.hotelAddress}</span></p>
-              <p><span class="label">Comuna:</span><span class="value">${customerInfo.hotelCommune}</span></p>
-              ${customerInfo.hotelOther ? `<p><span class="label">Información adicional:</span><span class="value">${customerInfo.hotelOther}</span></p>` : ''}
+            <p><span class="label">Tipo de entrega:</span><span class="value">${customerInfo.deliveryMethod === 'pickup_santiago' ? 'Retiro en oficina Santiago' : customerInfo.deliveryMethod === 'pickup_buenosaires' ? 'Retiro en oficina Buenos Aires' : 'Entrega en hotel'}</span></p>
+            ${customerInfo.deliveryMethod === 'hotel_delivery' ? `
+              <p><span class="label">Hotel:</span><span class="value">${customerInfo.hotelDetails?.hotelName}</span></p>
+              <p><span class="label">Dirección:</span><span class="value">${customerInfo.hotelDetails?.address}</span></p>
+              <p><span class="label">Comuna:</span><span class="value">${customerInfo.hotelDetails?.comuna}</span></p>
+              ${customerInfo.hotelDetails?.roomNumber ? `<p><span class="label">Información adicional:</span><span class="value">${customerInfo.hotelDetails.roomNumber}</span></p>` : ''}
             ` : ''}
           </div>
 
@@ -503,8 +509,8 @@ function generateCustomerEmail(
             <ul>${renderProductSummary()}</ul>
             
             <p><strong>Tu Llegada:</strong> ${arrivalTimeFormatted}</p>
-            <p><strong>Tipo de entrega:</strong> ${customerInfo.deliveryOption === 'pickup' ? 'Retiro en oficina' : 'Entrega en hotel'}</p>
-            ${customerInfo.deliveryOption === 'hotel' ? `<p><strong>Hotel:</strong> ${customerInfo.hotelName}, ${customerInfo.hotelCommune}</p>` : ''}
+            <p><strong>Tipo de entrega:</strong> ${customerInfo.deliveryMethod === 'pickup_santiago' ? 'Retiro en oficina Santiago' : customerInfo.deliveryMethod === 'pickup_buenosaires' ? 'Retiro en oficina Buenos Aires' : 'Entrega en hotel'}</p>
+            ${customerInfo.deliveryMethod === 'hotel_delivery' ? `<p><strong>Hotel:</strong> ${customerInfo.hotelDetails?.hotelName}, ${customerInfo.hotelDetails?.comuna}</p>` : ''}
           </div>
 
           ${productsToSearch.length > 0 ? `
