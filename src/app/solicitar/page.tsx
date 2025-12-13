@@ -1029,36 +1029,7 @@ export default function SolicitarPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <div>
-                <Image
-                  src="/andes_logo.png"
-                  alt="AndesGO Logo"
-                  width={60}
-                  height={60}
-                  className="rounded-lg"
-                />
-              </div>
-              <span className="text-2xl font-bold">AndesGO</span>
-            </div>
-            <p className="text-gray-400 mb-4">¿Necesitas ayuda? Contáctanos</p>
-            <div className="flex justify-center space-x-6 text-sm">
-              <span className="flex items-center">
-                <Mail className="h-4 w-4 mr-2" />
-                andesgoshopping@gmail.com
-              </span>
-              <span className="flex items-center">
-                <Phone className="h-4 w-4 mr-2" />
-                +56 982876757
-              </span>
-            </div>
-          </div>
-        </div>
-      </footer>
+
     </div>
   )
 }

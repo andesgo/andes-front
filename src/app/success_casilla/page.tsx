@@ -65,9 +65,9 @@ export default function SuccessPage() {
                   <div className="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                     <Clock className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">1. Revisión</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">1. Comprá online</h3>
                   <p className="text-gray-600 text-sm">
-                    Analizamos tu solicitud en las próximas 2-4 horas hábiles.
+                    Analizamos tu solicitud para hacer seguimiento a tus compras.
                   </p>
                 </div>
 
@@ -75,9 +75,9 @@ export default function SuccessPage() {
                   <div className="bg-emerald-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                     <Mail className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">2. Confirmación</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">2. Recibimos</h3>
                   <p className="text-gray-600 text-sm">
-                    Te enviamos un email con cotización y detalles de pago.
+                    Recibimos tus productos, los almacenamos de forma segura y te avisamos cuando estén en nuestras manos.
                   </p>
                 </div>
 
@@ -85,9 +85,9 @@ export default function SuccessPage() {
                   <div className="bg-purple-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                     <Shield className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">3. Compra</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">3. Retirá</h3>
                   <p className="text-gray-600 text-sm">
-                    Realizamos tu compra y la tenemos lista para ti.
+                    Cuando llegues a Chile, retira todos tus productos juntos, sin apuros ni costos extra.
                   </p>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export default function SuccessPage() {
               </Link>
               
               <Link
-                href="/solicitar"
+                href="/casilla"
                 className="flex-1 border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-all flex items-center justify-center group"
               >
                 <FileText className="mr-2 h-5 w-5" />
@@ -165,7 +165,7 @@ export default function SuccessPage() {
         </div>
       </main>
 
-
+      
     </div>
   )
 }

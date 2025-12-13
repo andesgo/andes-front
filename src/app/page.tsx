@@ -553,7 +553,7 @@ export default function Home() {
 
   // Componente Botón Flotante de WhatsApp
   const WhatsAppButton = () => {
-    const whatsappNumber = "56982876757"; 
+    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER; 
     const message = encodeURIComponent("¡Hola! Me interesa conocer más sobre los servicios de AndesGO");
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
 
@@ -614,7 +614,7 @@ export default function Home() {
               <a href="#como-funciona" className="text-gray-700 hover:text-blue-600 transition-colors">Cómo Funciona</a>
               <a href="#bodegaje" className="text-gray-700 hover:text-blue-600 transition-colors">Bodegaje</a>
               <a href="#contacto" className="text-gray-700 hover:text-blue-600 transition-colors">Contacto</a>
-              <Link href="/solicitar" className="bg-gradient-to-r from-blue-600 to-emerald-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
+              <Link href="/casilla" className="bg-gradient-to-r from-blue-600 to-emerald-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
                 Solicitar Ahora
               </Link>
             </div>
@@ -629,19 +629,20 @@ export default function Home() {
             <div>
               <div className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
                 <span className="w-2 h-2 bg-blue-600 rounded-full mr-2 animate-pulse"></span>
-                Servicio Premium de Shopping Personal
+                Servicio Premium de Bodegaje
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                Compramos por ti en
+                Almacenamos por ti en
                 <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent"> Chile</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                El servicio de picking más confiable para extranjeros: compramos y recibimos tus compras para que estén listas a tu llegada.  
-                Además, contamos con custodia segura de equipaje, con planes por día o por semana.
+                Servicio de Bodega Inteligente, Compra en cualquier tienda del mundo y recibe tus productos en Chile sin complicaciones.
+                Nuestro servicio de casillas te permite aprovechar precios más bajos, ofertas internacionales y menores impuestos respecto a otros países.
+                Retira cuando estes en Chile
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/solicitar" className="bg-gradient-to-r from-blue-600 to-emerald-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all flex items-center justify-center group">
-                  Comenzar Ahora
+                <Link href="/casilla" className="bg-gradient-to-r from-blue-600 to-emerald-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all flex items-center justify-center group">
+                  Reserva Tu Espacio
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-all">
@@ -677,37 +678,21 @@ export default function Home() {
           <div className="text-center mb-16">
             <div className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <ShoppingBag className="w-4 h-4 mr-2" />
-              Picking Premium
+              Casillas Premium
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Servicio de Shopping Personal</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Servicio de Bodegaje Personal</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ofrecemos un servicio completo y confiable para que puedas obtener cualquier producto chileno sin complicaciones.
+              Ofrecemos Asistencia Personal para que puedas realizar tus compras en Chile sin complicaciones.
+            </p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Ideal para turistas que quieren aprovechar el menor impuesto de la región, comprar con anticipación o aprovechar ofertas que no están disponibles en su país.
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
+
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl hover:shadow-lg transition-all">
               <div className="bg-blue-600 w-14 h-14 rounded-full flex items-center justify-center mb-6">
-                <Truck className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Logística Completa</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Nos encargamos de toda la gestión: desde la compra hasta la entrega en nuestras oficinas o tu hotel.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl hover:shadow-lg transition-all">
-              <div className="bg-emerald-600 w-14 h-14 rounded-full flex items-center justify-center mb-6">
-                <MapPin className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Múltiples Tiendas</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Compramos en cualquier tienda online chilena. Una sola solicitud, múltiples productos.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl hover:shadow-lg transition-all">
-              <div className="bg-purple-600 w-14 h-14 rounded-full flex items-center justify-center mb-6">
                 <Shield className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">100% Seguro</h3>
@@ -715,16 +700,6 @@ export default function Home() {
                 Protección completa de tu compra. Si algo sale mal, nos hacemos responsables.
               </p>
             </div> 
-
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl hover:shadow-lg transition-all">
-              <div className="bg-blue-600 w-14 h-14 rounded-full flex items-center justify-center mb-6">
-                <WalletCards className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Paga en Cuotas</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Facilidades de pago para que puedas adquirir lo que necesitas sin preocupaciones.
-              </p>
-            </div>
 
             <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl hover:shadow-lg transition-all">
               <div className="bg-emerald-600 w-14 h-14 rounded-full flex items-center justify-center mb-6">
@@ -762,9 +737,9 @@ export default function Home() {
               <div className="bg-gradient-to-r from-blue-600 to-emerald-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                 1
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Envía tu Lista</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Compra donde quieras</h3>
               <p className="text-gray-600">
-                Completa nuestro formulario con los links de los productos que quieres comprar.
+                Amazon, AliExpress, Shein, e incluso comercios locales chilenos.
               </p>
             </div>
 
@@ -772,9 +747,9 @@ export default function Home() {
               <div className="bg-gradient-to-r from-blue-600 to-emerald-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                 2
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Confirmamos y Compramos</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Envia a Nuestra Bodega</h3>
               <p className="text-gray-600">
-                Verificamos precios y disponibilidad, luego procedemos con la compra.
+                Te compartimos nuestras direcciones en Chile para que envíes tus compras.
               </p>
             </div>
 
@@ -782,9 +757,9 @@ export default function Home() {
               <div className="bg-gradient-to-r from-blue-600 to-emerald-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                 3
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Preparamos tu Pedido</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Nosotros almacenamos todo</h3>
               <p className="text-gray-600">
-                Recibimos y preparamos cuidadosamente todos tus productos.
+                Guardamos tus productos en nuestra bodega segura hasta tu llegada a Chile.
               </p>
             </div>
 
@@ -792,9 +767,9 @@ export default function Home() {
               <div className="bg-gradient-to-r from-blue-600 to-emerald-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                 4
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Retira o Recibe</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Retira cuando estés aquí</h3>
               <p className="text-gray-600">
-                Retira en nuestras oficinas o recibe en tu hotel cuando llegues a Chile.
+                Sin apuros, sin trámites y sin costos inesperados.
               </p>
             </div>
           </div>
@@ -823,66 +798,11 @@ export default function Home() {
             Crear mi Primera Solicitud
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Link>
+
         </div>
       </section>
 
-      {/* Footer */}
-      <footer id="contacto" className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div >
-                  <Image
-                    src="/andes_logo.png"
-                    alt="AndesGO Logo"
-                    width={60}
-                    height={60}
-                    className="rounded-lg"
-                  />
-                </div>
-                <span className="text-2xl font-bold">AndesGO</span>
-              </div>
-              <p className="text-gray-400">
-                Tu servicio de picking personal en Chile.
-              </p>
-            </div>
 
-            <div>
-              <h4 className="font-bold mb-4">Servicios</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>Personal Shopping</li>
-                <li>Logística Completa</li>
-                <li>Entrega en Hotel</li>
-                <li>Retiro en Oficina</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4">Soporte</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>Centro de Ayuda</li>
-                <li>Política de Devoluciones</li>
-                <li>Términos y Condiciones</li>
-                <li>Privacidad</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-4">Contacto</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>andesgoshopping@gmail.com</li>
-                <li>+56 9 8287 6757</li>
-                <li>Santiago, Chile</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 AndesGO. Todos los derechos reservados.</p>
-          </div>
-        </div>
-      </footer>
     </div>
     </>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
 import ClientAnalytics from './components/ClientAnalytics'
+import Footer from "./components/Footer";
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -89,7 +90,14 @@ export default function RootLayout({
           />
         </noscript>
         
-        {children}
+        <main className="min-h-screen flex flex-col">
+          <div className="flex-grow">
+            {children}
+          </div>
+
+          {/* Footer global */}
+          <Footer />
+        </main>
         {/* Vercel Analytics - cliente */}
         <ClientAnalytics />
       </body>
